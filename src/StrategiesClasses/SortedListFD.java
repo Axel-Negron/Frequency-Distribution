@@ -8,7 +8,7 @@ import DataStructures.SortedList.*;
 
 /**
  * This class implements the SortedList strategy to count frequencies in an ArrayList.
- * @author Fernando J. Bermudez && YOUR NAME HERE
+ * @author Fernando J. Bermudez && Axel Negron
  *
  * @param <E> The type of the elements whose frequencies are being counted.
  */
@@ -51,14 +51,38 @@ public class SortedListFD<E extends Comparable<E>> extends AbstractFDStrategy<E>
 	 * Method that counts the frequency of a dataSet with a SortedList
 	 * It uses Map.Entry to count the frequency of each elements inside dataSet
 	 * 
-	 * @author YOUR NAME HERE
+	 * @author Axel Negron
 	 * @param dataSet	The Data Set to count and distribute the frequency of its elements
 	 * @return results 	The resulting entries of each elements inside dataSet
 	 */
 	@Override
 	public ArrayList<Map.Entry<E, Integer>> computeFDList(ArrayList<E> dataSet) {
-		/*TODO ADD YOUR CODE HERE*/
-		return null; //Dummy Return	
+		
+	// We begin by adding data into a SortedArrayList, the data is sorted automatically when added.
+		dataSet.sort(null);
+		ArrayList<Map.Entry<E, Integer>> results = new ArrayList<>();
+		for(E e: dataSet) {
+			boolean found = false;
+			
+			for(int i=0; i<results.size() && results.get(i).getKey().compareTo(e)!=1 && !found;i++) {
+				
+				Map.Entry<E, Integer> entry = results.get(i);
+				
+				if(entry.getKey().equals(e)) {
+					found = true;
+					entry.setValue(entry.getValue()+1);
+					
+				}
+			}
+			if(!found) {
+				Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<E, Integer>(e,1);
+				results.add(temp);
+			}
+			
+			
+			
+		}
+	 	return results; //Dummy Return
 	}
 
 }
