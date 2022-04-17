@@ -39,6 +39,7 @@ public class OrderedFD<E extends Comparable<E>> extends AbstractFDStrategy<E> {
 				if(entry.getKey().equals(e)) {
 					found = true;
 					entry.setValue(entry.getValue()+1);
+					break;
 					
 				}
 			}

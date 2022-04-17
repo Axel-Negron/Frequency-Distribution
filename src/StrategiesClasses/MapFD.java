@@ -1,5 +1,6 @@
 package StrategiesClasses;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
@@ -28,8 +29,24 @@ public class MapFD<E extends Comparable<E>> extends AbstractFDStrategy<E> {
 	 */
 	@Override
 	public ArrayList<Entry<E, Integer>> computeFDList(ArrayList<E> dataSet) {
-		/*TODO ADD YOUR CODE HERE*/
-		return null; //Dummy Return
+		ArrayList<Entry<E, Integer>> results = new ArrayList<>();
+		Hashtable<E,Integer> storage = new Hashtable<>();
+		for(E e: dataSet) {
+			if(storage.get(e)==null) {
+				storage.put(e, 1);
+			}
+			else {
+				int value = 1;
+				value+=storage.get(e);
+				storage.put(e, value);
+			}
+		}
+		Set<E> keys = storage.keySet();
+		for(E e: keys) {
+			Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<E,Integer>(e,storage.get(e));
+			results.add(temp);
+		}
+		return results; //Dummy Return
 	}
 
 }
