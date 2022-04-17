@@ -27,8 +27,30 @@ public class OrderedFD<E extends Comparable<E>> extends AbstractFDStrategy<E> {
 	 */
 	@Override
 	public ArrayList<Entry<E, Integer>> computeFDList(ArrayList<E> dataSet) {
-		/*TODO ADD YOUR CODE HERE*/
-		return null; //Dummy Return
+		dataSet.sort(null);
+		ArrayList<Map.Entry<E, Integer>> results = new ArrayList<>();
+		for(E e: dataSet) {
+			boolean found = false;
+			
+			for(int i=0; i<results.size() && results.get(i).getKey().compareTo(e)!=1 && !found;i++) {
+				
+				Map.Entry<E, Integer> entry = results.get(i);
+				
+				if(entry.getKey().equals(e)) {
+					found = true;
+					entry.setValue(entry.getValue()+1);
+					
+				}
+			}
+			if(!found) {
+				Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<E, Integer>(e,1);
+				results.add(temp);
+			}
+			
+			
+			
+		}
+	 	return results; //Dummy Return
 	}
 
 }

@@ -59,30 +59,35 @@ public class SortedListFD<E extends Comparable<E>> extends AbstractFDStrategy<E>
 	public ArrayList<Map.Entry<E, Integer>> computeFDList(ArrayList<E> dataSet) {
 		
 	// We begin by adding data into a SortedArrayList, the data is sorted automatically when added.
-		dataSet.sort(null);
+		SortedArrayList<E> sorted = new SortedArrayList<>(dataSet.size());
 		ArrayList<Map.Entry<E, Integer>> results = new ArrayList<>();
 		for(E e: dataSet) {
-			boolean found = false;
+			sorted.add(e);
+		}
+		Map.Entry<E, Integer> first = new AbstractMap.SimpleEntry<E,Integer>(sorted.get(0),1);
+		results.add(first);
+		
+		for(int i=1; i<sorted.size();i++) {
+			E e = sorted.get(i);
 			
-			for(int i=0; i<results.size() && results.get(i).getKey().compareTo(e)!=1 && !found;i++) {
-				
-				Map.Entry<E, Integer> entry = results.get(i);
-				
-				if(entry.getKey().equals(e)) {
-					found = true;
-					entry.setValue(entry.getValue()+1);
+			for(int j=0; j<results.size();j++) {
+				Map.Entry<E, Integer> entry = results.get(j);
 					
+				if(entry.getKey().equals(e)) {
+					entry.setValue(entry.getValue()+1);
+					break;
+				}
+				
+				else if(entry.getKey().compareTo(e)<0&& j== results.size()-1){
+					
+					Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<E,Integer>(e,1);
+					results.add(temp);
+					break;
 				}
 			}
-			if(!found) {
-				Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<E, Integer>(e,1);
-				results.add(temp);
-			}
-			
-			
-			
 		}
+	
 	 	return results; //Dummy Return
 	}
-
+	
 }
