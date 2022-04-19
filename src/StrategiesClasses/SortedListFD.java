@@ -69,25 +69,19 @@ public class SortedListFD<E extends Comparable<E>> extends AbstractFDStrategy<E>
 		
 		for(int i=1; i<sorted.size();i++) {
 			E e = sorted.get(i);
+			if(e.compareTo(results.get(results.size()-1).getKey())>0) {
+				Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<>(e,1);
+				results.add(temp);
+			}
 			
-			for(int j=0; j<results.size();j++) {
-				Map.Entry<E, Integer> entry = results.get(j);
-					
-				if(entry.getKey().equals(e)) {
-					entry.setValue(entry.getValue()+1);
-					break;
-				}
-				
-				else if(entry.getKey().compareTo(e)<0&& j== results.size()-1){
-					
-					Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<E,Integer>(e,1);
-					results.add(temp);
-					break;
+			else {
+				results.get(results.size()-1).setValue(results.get(results.size()-1).getValue()+1);
 				}
 			}
-		}
-	
-	 	return results; //Dummy Return
+		
+		return results; //Dummy Return
+	 	
 	}
+	
 	
 }

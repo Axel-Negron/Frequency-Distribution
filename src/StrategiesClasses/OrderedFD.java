@@ -46,6 +46,7 @@ public class OrderedFD<E extends Comparable<E>> extends AbstractFDStrategy<E> {
 			if(!found) {
 				Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<E, Integer>(e,1);
 				results.add(temp);
+				
 			}
 			
 			
