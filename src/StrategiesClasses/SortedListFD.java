@@ -49,7 +49,14 @@ public class SortedListFD<E extends Comparable<E>> extends AbstractFDStrategy<E>
 	
 	/**
 	 * Method that counts the frequency of a dataSet with a SortedList
-	 * It uses Map.Entry to count the frequency of each elements inside dataSet
+	 * It uses Map.Entry to count the frequency of each elements inside dataSet. The method takes
+	 * the parameter dataSet which is an ArrayList<E> and adds each element into a SortedArrayList.
+	 * The add() method from the SortedArrayList automatically sorts and stores the element. Once sorted 
+	 * we iterate over the SortedArrayList and verify if the element is accounted for in a  our 
+	 * resultant ArrayList<Map.Entry> structure.
+	 * If the element is present we increase the frequency of the element by 1, otherwise we add it 
+	 * as an entry of our ArrayList<Map.Entry>. Finally we return the resultant ArrayList containing 
+	 * Map Entries.
 	 * 
 	 * @author Axel Negron
 	 * @param dataSet	The Data Set to count and distribute the frequency of its elements
