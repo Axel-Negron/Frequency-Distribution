@@ -1,6 +1,5 @@
 package StrategiesClasses;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
@@ -26,8 +25,7 @@ public class MapFD<E extends Comparable<E>> extends AbstractFDStrategy<E> {
 	 * if the the element is not present in the Hash table we add it, otherwise we add one to the element
 	 * frequency value and place the object back with the new value. When we add the element into the Hash table
 	 * we first add the element as the key and the starter frequency of 1. After we have our complete
-	 * Hash Table we get the keys from the Hash table and iterate through the elements adding them alongside
-	 * their frequency value into our resultant ArrayList.
+	 * Hash Table we get the entries from the Hash table and iterate through the entries adding them into our resultant ArrayList.
 	 * 
 	 * @param dataSet	The Data Set to count and distribute the frequency of its elements
 	 * @return results 	The resulting entries of each elements inside dataSet
@@ -46,10 +44,10 @@ public class MapFD<E extends Comparable<E>> extends AbstractFDStrategy<E> {
 				storage.put(e, value);
 			}
 		}
-		Set<E> keys = storage.keySet();
-		for(E e: keys) {
-			Map.Entry<E, Integer> temp = new AbstractMap.SimpleEntry<E,Integer>(e,storage.get(e));
-			results.add(temp);
+		Set<Entry<E, Integer>> entry = storage.entrySet();
+		
+		for(Entry<E, Integer> e: entry) {
+			results.add(e);
 		}
 		return results; //Dummy Return
 	}
